@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'snippets/header.html' %}
+<title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+</head>
+
+    <body class="d-flex h-100 text-center text-white" style="background-color:  #17202a;">
+    
+    <! Body -->
+    <main>
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+    <! EndBody -->
+
+    {% include 'snippets/footer.html' %}
+
+</body>
+
+</html>

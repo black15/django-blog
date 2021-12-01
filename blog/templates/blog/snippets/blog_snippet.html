@@ -1,0 +1,48 @@
+<style type="text/css">
+	.card{
+		max-width: 700px;
+		width: 100%;
+	}
+	.card-body{
+		padding: 20px;
+	}
+</style>
+
+{% if blog %}
+<div class="container">
+	<div class="row">
+		<!-- Blog Post -->
+		<div class="card m-auto" style="background-color: #2c3e50;">
+			<a href="{% url 'blog:details' blog.slug %}">
+				<img class="card-img-top" src="{{blog.image.url}}">
+			</a>
+			<div class="card-body mt-2 mb-2">
+				<a href="{% url 'blog:details' blog.slug %}">
+					<h2 class="card-title">{{blog.title}}</h2>
+				</a>
+				<p class="card-text">{{blog.body|truncatechars:180}}</p>
+				{% if blog.author == request.user %}
+					<a href="{% url 'blog:edit' blog.slug %}" class="btn btn-primary">Update</a>
+				{% endif %}
+			</div>
+			<div class="card-footer text-muted">
+			  Updated on {{blog.update_date}} by {{blog.author}}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% else %}
+
+<div class="container">
+	<div class="row">
+		<div class="card m-auto">
+			<div class="card-body mt-2 mb-2">
+				<h2 class="card-title">No results</h2>
+				<p class="card-text">There were no results matching the search: "{{query}}"</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endif %}

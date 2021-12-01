@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %} {{blog}} {% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-12" style=" background-color: #2c3e50; border-radius:5px; color: white;"> 
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{blog}}</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">Posted on {{blog.update_date}} by {{blog.author}}</div>
+                            <!-- Post categories-->
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4"><img class="img-fluid rounded" width=900 src="{{blog.image.url}}" alt="..." /></figure>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p>{{blog.body | safe}}</p>
+                        </section>
+                    </article>
+                    <!-- Comments section-->
+                    {% if request.user == blog.author %}
+                        <a class="submit-button btn btn-lg btn-danger btn-block mb-3" href="{% url 'blog:edit' blog.slug %}">EDIT</a>
+                    {% endif %}
+                </div>
+                <!-- Side widgets-->
+{% endblock content %}

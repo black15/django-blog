@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Django Start {% endblock title %}
+
+{% block content %}
+
+
+<style type="text/css">
+
+	@media (max-width: 768px) { 
+		.right-column{
+			margin-left: 0px;
+		}
+	}
+
+	@media (min-width: 768px) { 
+		.right-column{
+			margin-left: 20px;
+		}
+	}
+
+	.blog-post-container{
+		margin-bottom: 20px;
+		width: 100%;
+	}
+	.create-post-bar{
+		background-color: #fff;
+		margin-bottom:20px;
+	}
+
+	.left-column{
+		padding:0px;
+	}
+
+	.right-column{
+		padding:0px;
+	}
+	.lead{
+		font-size: 17px;
+	}
+</style>
+
+
+<!-- main content -->
+<div class="container">
+	<div class="row">
+
+		<!-- blog feed -->
+		<div class="left-column col-lg-7 offset-lg-1">
+
+			<!-- Top 'create post' bar -->
+			<div class="d-lg-none mb-3">
+				<div class="card m-auto d-flex flex-column p-3" style="background-color: #2c3e50;">
+					<img class="img-fluid d-block m-auto pb-2" src="https://occ-0-1722-1723.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABab_6Eo7rVjm18h0vPxHu7Ql9yQRlBHIUmEh0VsflX01b8jEmRTqgCmeBcWFjOKrdct7vPXLNMA3jyZhMk189vwWOCwd2ewKlcLg.png?r=c59" width="72" height="72">
+					<p class="lead">You're using your phone bitch, or u just minimized ur window xD !</p>
+					<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create post</a></p>
+				</div>
+			</div>
+			<!-- end Top 'create post' bar -->
+
+			<!-- Blog posts-->
+				{% for blog in blogs %}
+					<div class="blog-post-container">
+						{% include 'blog/snippets/blog_snippet.html' with blog=blog %}
+					</div>
+				{% endfor %}
+			<!-- End Blog posts-->
+
+		<!-- Pagination -->
+		{% comment %} {% include 'blog/snippets/blog_post_pagination.html' with blog_posts=blog_posts %} {% endcomment %}
+
+		</div>
+		<!-- end blog feed -->
+
+
+		<!-- Right 'create post' column  -->
+		<div class="right-column col-lg-3 d-lg-flex d-none flex-column">
+
+			<div class="card create-post-bar d-flex flex-column p-3" style="background-color: #2c3e50;">
+				<img class="img-fluid d-block m-auto pb-2" src="https://occ-0-1722-1723.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABab_6Eo7rVjm18h0vPxHu7Ql9yQRlBHIUmEh0VsflX01b8jEmRTqgCmeBcWFjOKrdct7vPXLNMA3jyZhMk189vwWOCwd2ewKlcLg.png?r=c59" width="72" height="72">
+				<p class="lead">Terma Test in Django !</p>
+				<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create post</a></p>
+			</div>
+		
+		</div>
+		<!-- end Right 'create post' column  -->
+
+
+
+	</div>
+</div>
+
+{% endblock content %}
